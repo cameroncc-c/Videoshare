@@ -36,7 +36,12 @@ function submitNewAsset(){
   submitData = new FormData();
 
   //Get form variables and append them to the form data object
-  submitData.append('FileName', $('#FileName').val());  
+  submitData.append('FileName', $('#FileName').val());
+  submitData.append('ageRating', $('#ageRating').val());
+  submitData.append('genre', $('#genre').val());
+  submitData.append('producer', $('#producer').val());
+  submitData.append('publisher', $('#publisher').val());
+  submitData.append('videoTitle', $('#videoTitle').val());         
   submitData.append('File', $("#UpFile")[0].files[0]); 
   
   //Post the form data to the endpoint, note the need to set the content type header
@@ -69,8 +74,9 @@ function getVideos(){
 
       items.push( "<hr />");
       items.push("<video width='400' controls><source src='"+BLOB_ACCOUNT + val["filepath"] +"' /></video><br />") 
-      items.push( "File : " + val["fileName"] + "<br />");
+      items.push( "File: " + val["fileName"] + " (Title: "+val["videoTitle"]+")<br />");
       items.push( "Publsihed by: " + val["publisher"] + " (Producer: "+val["producer"]+")<br />");
+      items.push( "Age Rating: " + val["ageRating"] + " (Genre: "+val["genre"]+")<br />");
       items.push('<button type="button" id="subNewForm" class="btn btn-danger" onclick="deleteAsset('+val["fileName"] +')">Delete</button> <br/><br/>');
       items.push( "<hr />");
     });
